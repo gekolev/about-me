@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"; // Import the necessary shadcn components
 import Link from "next/link";
 import "./globals.css";
-import { Button } from "@/components/ui/button";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
