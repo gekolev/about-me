@@ -28,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className="max-w-screen-lg mx-auto my-4">
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -42,6 +43,8 @@ export default function RootLayout({
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
+        </div>
+
         {children}
       </body>
     </html>
