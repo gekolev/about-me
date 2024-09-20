@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import Markdown from "markdown-to-jsx"
 import getPostMetadata from "@/utils/getPostMetadata"
 import React from 'react'
