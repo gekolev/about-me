@@ -21,7 +21,7 @@ export const generateStaticParams = async () => {
     return posts.map((post) => ({ slug: post.slug }))
 }
 
-export async function generateMetadata({ params, searchParams }: { params: { slug: string }, searchParams: URLSearchParams }) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
     const id = params?.slug ? ' ⋅ ' + params?.slug : ''
     return {
         title: `Title Example${id.replaceAll('_', ' ')}`

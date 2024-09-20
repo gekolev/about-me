@@ -8,7 +8,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
-import Transition from "@/components/ui/Transition";
+// import Transition from "@/components/ui/Transition";
 import LenisScroll from "@/components/ui/LenisScroll";
 import "./globals.css";
 
