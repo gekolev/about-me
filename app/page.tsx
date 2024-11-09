@@ -19,7 +19,7 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="mt-1 mb-6">
+        <p className="mt-1 mb-4">
           Developer and aspiring Project Manager who develops user-centered
           products. <br />
           Passionate about creating good things with good people.
