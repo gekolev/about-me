@@ -9,7 +9,7 @@ export default function Home() {
       <div className="sm:p-10 max-w-xxl">
         <div className="flex justify-end">
         <Avatar className="h-14 w-14">
-              <AvatarImage src="images/mini-me.jpeg" />
+              <AvatarImage src="images/mini-me_cropped.webp" />
               <AvatarFallback>GK</AvatarFallback>
             </Avatar>
         </div>
