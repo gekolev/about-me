@@ -3,11 +3,12 @@ import Markdown from "markdown-to-jsx";
 import fs from "fs";
 import matter from "gray-matter";
 import React from "react";
+import path from "path";
 
 function getPostContent(slug: string) {
-  const folder = "articles/";
+  const folder = path.join(process.cwd(), "articles");
   const fileName = slug.replace(/_/g, " ") + ".md";
-  const filePath = folder + fileName;
+  const filePath = path.join(folder, fileName);
 
   const fileContents = fs.readFileSync(filePath, "utf8");
   const matterResult = matter(fileContents);
@@ -40,7 +41,9 @@ export default function RecipePage(props: { params: { slug: string } }) {
 
           if (match) {
             const videoId = match[1] || match[2] || match[3];
-            return <YouTubeEmbed src={`https://www.youtube.com/embed/${videoId}`} />;
+            return (
+              <YouTubeEmbed src={`https://www.youtube.com/embed/${videoId}`} />
+            );
           }
         }
       }
