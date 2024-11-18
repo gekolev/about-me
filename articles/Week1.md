@@ -4,12 +4,14 @@ date: "20.09.2024"
 prep_time: "15 minutes"
 cook_time: "10 minutes"
 description: "Classic, chewy cookies loaded with semi-sweet chocolate chips, perfect for dunking in milk."
-
+layout: "1"
 ---
 
 # Chocolate Chip Cookies
 
 ## Ingredients
+
+[Watch this awesome video](https://youtu.be/n6OTFyvNmU4)
 
 - 1 cup (2 sticks) unsalted butter, softened
 - 3/4 cup granulated sugar

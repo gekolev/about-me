@@ -1,45 +1,58 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-import Markdown from "markdown-to-jsx"
-import getPostMetadata from "@/utils/getPostMetadata"
-import React from 'react'
-import fs from 'fs'
-import matter from "gray-matter"
+import YouTubeEmbed from "@/components/ui/YouTubeEmbed";
+import Markdown from "markdown-to-jsx";
+import fs from "fs";
+import matter from "gray-matter";
+import React from "react";
 
 function getPostContent(slug: string) {
-    const folder = 'articles/'
+  const folder = "articles/";
+  const fileName = slug.replace(/_/g, " ") + ".md";
+  const filePath = folder + fileName;
 
-    const fileName = slug.replace(/_/g, ' ') + '.md'
-    const filePath = folder + fileName
+  const fileContents = fs.readFileSync(filePath, "utf8");
+  const matterResult = matter(fileContents);
 
-    const fileContents = fs.readFileSync(filePath, 'utf8')
-    const matterResult = matter(fileContents)
-
-    return matterResult
+  return matterResult;
 }
 
-export const generateStaticParams = async () => {
-    const posts = getPostMetadata('articles')
-    return posts.map((post) => ({ slug: post.slug }))
-}
+export default function RecipePage(props: { params: { slug: string } }) {
+  const slug = props.params.slug;
+  const post = getPostContent(slug);
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const id = params?.slug ? ' ⋅ ' + params?.slug : ''
-    return {
-        title: `Title Example${id.replaceAll('_', ' ')}`
-    }
-}
+  const overrides = {
+    p: ({
+      children,
+      ...props
+    }: {
+      children: React.ReactNode;
+      props?: React.HTMLAttributes<HTMLParagraphElement>;
+    }) => {
+      if (
+        Array.isArray(children) &&
+        children.length === 1 &&
+        React.isValidElement(children[0])
+      ) {
+        const element = children[0] as React.ReactElement<{ href?: string }>;
+        if (element.props.href) {
+          const youtubeRegex =
+            /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+|(?:v|e(?:mbed)?)\/([^&?\/\n\s]+)|\S*?[?&]v=([^&\n\s]+))|youtu\.be\/([^&\n\s]+))/;
+          const match = youtubeRegex.exec(element.props.href);
 
-export default function RecipePage(props: { params: { slug: any } }) {
+          if (match) {
+            const videoId = match[1] || match[2] || match[3];
+            return <YouTubeEmbed src={`https://www.youtube.com/embed/${videoId}`} />;
+          }
+        }
+      }
+      return <p {...props}>{children}</p>;
+    },
+  };
 
-    const slug = props.params.slug
-    const post = getPostContent(slug)
-    console.log(post)
-    return (
-        <main>
-            <article>
-                <Markdown>{post.content}</Markdown>
-            </article>
-        </main>
-    )
+  return (
+    <main>
+      <article>
+        <Markdown options={{ overrides }}>{post.content}</Markdown>
+      </article>
+    </main>
+  );
 }
