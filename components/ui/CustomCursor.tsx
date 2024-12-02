@@ -4,16 +4,16 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 
 const messages = [
-  "Hello, there!",
-  "You're awesome!",
-  "Keep exploring!",
-  "Have a great day!",
-  "Stay curious!",
-  "Click me!",
-  "Random fact!",
-  "What's next?",
-  "Try me!",
-  "Discover more!",
+  "It'll come, soon enough...",
+  "There's time, breathe.",
+  "Patience is key.",
+  "Noodles!",
+  "Can't time travel, sorry.",
+  "Can't see the future, sorry.",
+  "Come back later!",
+  "Currently planning what to do this week.",
+  "Might travel, might not.",
+  "I wonder if...",
 ];
 
 // Hardcoded values for specific weeks
