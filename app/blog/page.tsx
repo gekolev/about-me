@@ -1,9 +1,8 @@
 import getPostMetadata from "@/utils/getPostMetadata";
-import Link from "next/link";
-import React from "react";
+import ClientBlogList from "@/components/ui/ClientBlogList";
 import CustomCursor from "@/components/ui/CustomCursor";
 
-// Define a type for posts and titles
+// Define types for posts and titles
 type PostItem = {
   title: string;
   slug: string | null;
@@ -11,7 +10,7 @@ type PostItem = {
 };
 
 type TitleItem = {
-  isTitle: true;
+  isTitle: true; // Ensure isTitle is always `true`
   title: string;
 };
 
@@ -29,7 +28,7 @@ export default function BlogPage() {
   });
 
   // Titles for astronomical seasons with week ranges
-  const seasonMapping: { title: string; startWeek: number; endWeek: number }[] = [
+  const seasonMapping = [
     { title: "Winter", startWeek: 1, endWeek: 12 }, // Winter start
     { title: "Spring", startWeek: 13, endWeek: 25 },
     { title: "Summer", startWeek: 26, endWeek: 39 },
@@ -40,7 +39,7 @@ export default function BlogPage() {
   // Insert titles and organize items
   const itemsWithTitles: Item[] = [];
   for (const season of seasonMapping) {
-    itemsWithTitles.push({ isTitle: true, title: season.title });
+    itemsWithTitles.push({ isTitle: true, title: season.title }); // Explicitly assign true to isTitle
     for (let week = season.startWeek; week <= season.endWeek; week++) {
       const itemIndex = week - 1;
       itemsWithTitles.push(allItems[itemIndex]);
@@ -49,49 +48,11 @@ export default function BlogPage() {
 
   return (
     <main className="max-w-screen-xl my-0 mx-auto">
-         <CustomCursor />
+      <CustomCursor />
       <div>
         <h1 className="text-9xl my-5 font-bold text-right w-full">Blog - 2025</h1>
       </div>
-
-      <div className="grid grid-cols-4 gap-8">
-        {itemsWithTitles.map((item, index) => {
-          if ("isTitle" in item && item.isTitle) {
-            return (
-              <div
-                key={`title-${index}`}
-                className="col-span-1 text-center text-3xl font-bold my-5"
-              >
-                {item.title}
-              </div>
-            );
-          } else {
-            // Safely cast item to PostItem
-            const postItem = item as PostItem;
-            return (
-              <div
-                className={`border border-white p-5 ${
-                  postItem.slug ? "" : "bg-gray-300"
-                }`}
-                key={index}
-                data-cursor={postItem.bio || ""}
-              >
-                {postItem.slug ? (
-                  <Link href={`/blog/${postItem.slug}`}>
-                    <div className="text-center">
-                      <h1 className="text-2xl">{postItem.title}</h1>
-                    </div>
-                  </Link>
-                ) : (
-                  <div className="text-center">
-                    <h1 className="text-2xl">{postItem.title}</h1>
-                  </div>
-                )}
-              </div>
-            );
-          }
-        })}
-      </div>
+      <ClientBlogList items={itemsWithTitles} />
     </main>
   );
 }
