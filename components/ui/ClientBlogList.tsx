@@ -46,7 +46,7 @@ export default function ClientBlogList({ items }: Props) {
           return (
             <div
               className={`border border-white p-5 animated-item ${
-                postItem.slug ? "" : "bg-gray-300"
+                postItem.slug ? "" : "bg-neutral-800 border-none"
               }`}
               key={index}
               data-cursor={postItem.bio || ""}
