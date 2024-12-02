@@ -19,7 +19,7 @@ export default function getPostMetadata(basePath: string) {
             prep_time: matterResult.data.prep_time,
             cook_time: matterResult.data.cook_time,
             date: matterResult.data.date,
-            bio: matterResult.data.description,
+            bio: matterResult.data.bio,
             slug: sanitizedSlug // Use sanitized slug
         }
     })

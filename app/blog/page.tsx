@@ -7,16 +7,17 @@ export default function BlogPage() {
   const posts = getPostMetadata("articles");
   const totalItems = 52;
 
-  // Generate all items with week numbers
   const allItems = Array.from({ length: totalItems }, (_, index) => {
     const weekNumber = index + 1;
-    return posts[index] || { title: `Week${weekNumber}`, slug: null };
+    return (
+      posts[index] || { title: `Week${weekNumber}`, slug: null, bio: null }
+    );
   });
 
   return (
     <main className="max-w-screen-xl my-0 mx-auto">
       <div>
-      <CustomCursor />
+        <CustomCursor />
       </div>
 
       <div>
@@ -25,27 +26,29 @@ export default function BlogPage() {
 
       <div className="max-w-full">
         <ul className="flex flex-wrap justify-start gap-8">
-          {allItems.map((item, index) => (
-            <li
-              className={`w-1/5 h-1/6 border border-white p-5 ${
-                item.slug ? "" : "bg-gray-300"
-              }`}
-              key={index}
-              data-cursor={item.bio || ""}
-            >
-              {item.slug ? (
-                <Link href={`/blog/${item.slug}`}>
+          {allItems.map((item, index) => {
+            return (
+              <li
+                className={`w-1/5 h-1/6 border border-white p-5 ${
+                  item.slug ? "" : "bg-gray-300"
+                }`}
+                key={index}
+                data-cursor={item.bio || ""}
+              >
+                {item.slug ? (
+                  <Link href={`/blog/${item.slug}`}>
+                    <div className="text-center">
+                      <h1 className="text-2xl">{item.title}</h1>
+                    </div>
+                  </Link>
+                ) : (
                   <div className="text-center">
                     <h1 className="text-2xl">{item.title}</h1>
                   </div>
-                </Link>
-              ) : (
-                <div className="text-center">
-                  <h1 className="text-2xl">{item.title}</h1>
-                </div>
-              )}
-            </li>
-          ))}
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </main>

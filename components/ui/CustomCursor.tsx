@@ -18,8 +18,8 @@ const messages = [
 
 // Hardcoded values for specific weeks
 const hardcodedMessages = {
-  Week6: "On a ski trip", // Example of a fixed message
-  Week10: "Special event!", // Add more hardcoded weeks here if needed
+  Week6: "On a ski trip",
+  Week10: "Special event!",
 };
 
 const isHardcodedKey = (
@@ -35,24 +35,28 @@ const CustomCursor = () => {
     const xTo = gsap.quickTo(cursor, "x", { ease: "power3" });
     const yTo = gsap.quickTo(cursor, "y", { ease: "power3" });
 
-    // Assign messages (hardcoded or random) to each target
+    // Keep existing data-cursor values
     targets.forEach((target) => {
-      const weekTitle = target.textContent?.trim(); // e.g., "Week6"
+      const existingCursorValue = target.getAttribute("data-cursor");
 
-      // Check if the week has a hardcoded value
-      const assignedMessage =
-        weekTitle && isHardcodedKey(weekTitle)
-          ? hardcodedMessages[weekTitle]
-          : messages[Math.floor(Math.random() * messages.length)];
+      if (!existingCursorValue) {
+        const weekTitle = target.textContent?.trim();
 
-      target.setAttribute("data-cursor", assignedMessage);
+        // Assign a message if no existing data-cursor is present
+        const assignedMessage =
+          weekTitle && isHardcodedKey(weekTitle)
+            ? hardcodedMessages[weekTitle]
+            : messages[Math.floor(Math.random() * messages.length)];
+
+        target.setAttribute("data-cursor", assignedMessage);
+      }
     });
 
     const updateCursorPosition = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-        xTo(clientX);
-        yTo(clientY);
-      };
+      const { clientX, clientY } = e;
+      xTo(clientX);
+      yTo(clientY);
+    };
 
     const handleMouseEnter = (e: Event) => {
       const target = e.target as HTMLElement;
