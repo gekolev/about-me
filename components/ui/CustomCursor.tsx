@@ -32,6 +32,8 @@ const CustomCursor = () => {
   useEffect(() => {
     const cursor = cursorRef.current!;
     const targets = document.querySelectorAll("[data-cursor]");
+    const xTo = gsap.quickTo(cursor, "x", { ease: "power3" });
+    const yTo = gsap.quickTo(cursor, "y", { ease: "power3" });
 
     // Assign messages (hardcoded or random) to each target
     targets.forEach((target) => {
@@ -46,18 +48,11 @@ const CustomCursor = () => {
       target.setAttribute("data-cursor", assignedMessage);
     });
 
-    const xTo = gsap.quickTo(cursor, "x", { ease: "power3" });
-    const yTo = gsap.quickTo(cursor, "y", { ease: "power3" });
-
     const updateCursorPosition = (e: MouseEvent) => {
         const { clientX, clientY } = e;
       
-        // Offset adjustments if necessary (e.g., cursor size or visual discrepancy)
-        const xOffset = 0; // Adjust this value to tweak horizontal position
-        const yOffset = 0; // Adjust this value to tweak vertical position
-      
-        xTo(clientX + xOffset);
-        yTo(clientY + yOffset);
+        xTo(clientX);
+        yTo(clientY);
       };
 
     const handleMouseEnter = (e: Event) => {
