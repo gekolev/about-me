@@ -59,7 +59,7 @@ export default function ClientBlogList({ items }: Props) {
                 </Link>
               ) : (
                 <div className="text-center">
-                  <h1 className="text-2xl">{postItem.title}</h1>
+                  <h1 className="text-2xl line-through">{postItem.title}</h1>
                 </div>
               )}
             </div>
