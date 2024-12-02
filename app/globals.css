@@ -90,3 +90,21 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.cursor {
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out, transform 0.1s ease;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  z-index: 1000;
+  /* transform: translate(-50%, -50%); */
+}
+
+.cursor p {
+  margin: 0;
+}

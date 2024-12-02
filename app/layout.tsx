@@ -24,7 +24,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gekolev Portfolio",
+  title: "Gekolev Blog",
   description: "Personal website dedicated to the things I enjoy.",
 };
 

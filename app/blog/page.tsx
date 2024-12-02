@@ -1,6 +1,7 @@
 import getPostMetadata from "@/utils/getPostMetadata";
 import Link from "next/link";
 import React from "react";
+import CustomCursor from "@/components/ui/CustomCursor";
 
 export default function BlogPage() {
   const posts = getPostMetadata("articles");
@@ -14,6 +15,8 @@ export default function BlogPage() {
 
   return (
     <main className="max-w-screen-xl my-0 mx-auto">
+      <CustomCursor />
+
       <div>
         <h1 className="text-4xl my-5 font-bold">Blog Page - 2025</h1>
       </div>
@@ -23,11 +26,10 @@ export default function BlogPage() {
           {allItems.map((item, index) => (
             <li
               className={`w-1/5 h-1/6 border border-white p-5 ${
-                item.slug
-                  ? "hover:border-blue-500"
-                  : "bg-gray-300 hover:bg-red-500 cursor-not-allowed"
+                item.slug ? "" : "bg-gray-300"
               }`}
               key={index}
+              data-cursor={item.bio || ""}
             >
               {item.slug ? (
                 <Link href={`/blog/${item.slug}`}>
