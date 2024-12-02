@@ -50,7 +50,6 @@ const CustomCursor = () => {
 
     const updateCursorPosition = (e: MouseEvent) => {
         const { clientX, clientY } = e;
-      
         xTo(clientX);
         yTo(clientY);
       };

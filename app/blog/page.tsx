@@ -15,7 +15,9 @@ export default function BlogPage() {
 
   return (
     <main className="max-w-screen-xl my-0 mx-auto">
+      <div>
       <CustomCursor />
+      </div>
 
       <div>
         <h1 className="text-4xl my-5 font-bold">Blog Page - 2025</h1>
