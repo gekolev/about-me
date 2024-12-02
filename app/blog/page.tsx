@@ -49,12 +49,9 @@ export default function BlogPage() {
 
   return (
     <main className="max-w-screen-xl my-0 mx-auto">
+         <CustomCursor />
       <div>
-        <CustomCursor />
-      </div>
-
-      <div>
-        <h1 className="text-4xl my-5 font-bold">Blog Page - 2025</h1>
+        <h1 className="text-9xl my-5 font-bold text-right w-full">Blog - 2025</h1>
       </div>
 
       <div className="grid grid-cols-4 gap-8">
