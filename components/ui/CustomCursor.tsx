@@ -32,32 +32,16 @@ const CustomCursor = () => {
   useEffect(() => {
     const cursor = cursorRef.current!;
     const targets = document.querySelectorAll("[data-cursor]");
-    const xTo = gsap.quickTo(cursor, "x", { ease: "power3" });
-    const yTo = gsap.quickTo(cursor, "y", { ease: "power3" });
-
-    // Keep existing data-cursor values
-    targets.forEach((target) => {
-      const existingCursorValue = target.getAttribute("data-cursor");
-
-      if (!existingCursorValue) {
-        const weekTitle = target.textContent?.trim();
-
-        // Assign a message if no existing data-cursor is present
-        const assignedMessage =
-          weekTitle && isHardcodedKey(weekTitle)
-            ? hardcodedMessages[weekTitle]
-            : messages[Math.floor(Math.random() * messages.length)];
-
-        target.setAttribute("data-cursor", assignedMessage);
-      }
-    });
 
     const updateCursorPosition = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      xTo(clientX);
-      yTo(clientY);
+      requestAnimationFrame(() => {
+        if (cursor) {
+          cursor.style.transform = `translate(${e.clientX + 10}px, ${e.clientY + 10}px)`;
+        }
+      });
     };
 
+    // Keep all existing hover functionality
     const handleMouseEnter = (e: Event) => {
       const target = e.target as HTMLElement;
       const text = target.getAttribute("data-cursor");
@@ -72,7 +56,20 @@ const CustomCursor = () => {
       cursor.style.opacity = "0";
     };
 
+    // Set up initial messages (keep existing logic)
     targets.forEach((target) => {
+      const existingCursorValue = target.getAttribute("data-cursor");
+
+      if (!existingCursorValue) {
+        const weekTitle = target.textContent?.trim();
+        const assignedMessage =
+          weekTitle && isHardcodedKey(weekTitle)
+            ? hardcodedMessages[weekTitle]
+            : messages[Math.floor(Math.random() * messages.length)];
+
+        target.setAttribute("data-cursor", assignedMessage);
+      }
+
       target.addEventListener("mouseenter", handleMouseEnter);
       target.addEventListener("mouseleave", handleMouseLeave);
     });
@@ -88,7 +85,13 @@ const CustomCursor = () => {
     };
   }, []);
 
-  return <div className="cursor" ref={cursorRef}></div>;
+  return (
+    <div 
+      className="cursor pointer-events-none fixed left-0 top-0 z-50" 
+      ref={cursorRef}
+      style={{ willChange: 'transform' }}
+    ></div>
+  );
 };
 
 export default CustomCursor;
