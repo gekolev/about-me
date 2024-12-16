@@ -30,13 +30,14 @@ export default function ClientBlogList({ items }: Props) {
   }, []);
 
   return (
-    <div ref={containerRef} className="grid grid-cols-4 gap-8">
+    <div ref={containerRef}
+    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
       {items.map((item, index) => {
         if ("isTitle" in item && item.isTitle) {
           return (
             <div
               key={`title-${index}`}
-              className="col-span-1 text-center text-3xl font-bold my-5 animated-item"
+              className="md:text-center col-span-1 text-3xl font-bold my-5 animated-item"
             >
               {item.title}
             </div>

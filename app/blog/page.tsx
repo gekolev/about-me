@@ -47,12 +47,14 @@ export default function BlogPage() {
   }
 
   return (
-    <main className="max-w-screen-xl py-6 mx-auto">
+    <main className="max-w-screen-xl py-6 mx-auto px-4 xl:px-0">
       <CustomCursor />
       <div>
-        <h1 className="text-9xl mb-6 font-bold text-right w-full select-none">Blog - 2025</h1>
+        <h1 className=" text-6xl md:text-9xl mb-6 font-bold md:text-right w-full select-none">Blog-2025</h1>
       </div>
+
       <ClientBlogList items={itemsWithTitles} />
+
     </main>
   );
 }
