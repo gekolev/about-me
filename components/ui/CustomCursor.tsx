@@ -35,7 +35,7 @@ const CustomCursor = () => {
     const updateCursorPosition = (e: MouseEvent) => {
       requestAnimationFrame(() => {
         if (cursor) {
-          cursor.style.transform = `translate(${e.clientX + 10}px, ${e.clientY + 10}px)`;
+          cursor.style.transform = `translate(${e.clientX + 10}px, ${e.clientY + 15}px)`;
         }
       });
     };
